@@ -29,9 +29,24 @@ TASK_A_CATERING_COST_GBP = 5600.0
 # Did the weather tool return outdoor_ok = True or False?
 TASK_A_OUTDOOR_OK = False
 
-TASK_A_NOTES = ""   # optional — anything unexpected
+# Optional — anything unexpected.
+# If you used a non-default model via RESEARCH_MODEL env var, note it here.
+# Example: "Used nvidia/nemotron-3-super-120b-a12b for the agent loop."
+TASK_A_NOTES = ""
 
 # ── Task B ─────────────────────────────────────────────────────────────────
+#
+# The scaffold ships with a working generate_event_flyer that has two paths:
+#
+#   - Live mode: if FLYER_IMAGE_MODEL is set in .env, the tool calls that
+#     model and returns a real image URL.
+#   - Placeholder mode: otherwise (the default) the tool returns a
+#     deterministic placehold.co URL with mode="placeholder".
+#
+# Both paths return success=True. Both count as "implemented" for grading.
+# This is not the original Task B — the original asked you to write a direct
+# FLUX image call, but Nebius removed FLUX on 2026-04-13. See CHANGELOG.md
+# §Changed for why we pivoted the task.
 
 # Has generate_event_flyer been implemented (not just the stub)?
 TASK_B_IMPLEMENTED = True   # True or False
@@ -41,6 +56,12 @@ TASK_B_IMAGE_URL_OR_ERROR = "https://pictures-storage.storage.eu-north1.nebius.c
 
 # The prompt sent to the image model. Copy from terminal output.
 TASK_B_PROMPT_USED = "Professional event flyer for Edinburgh AI Meetup, tech professionals, modern venue at The Haymarket Vaults, Edinburgh. 160 guests tonight. Warm lighting, Scottish architecture background, clean modern typography."
+
+# Why did the agent's behaviour NOT change when Nebius removed FLUX?
+# One sentence. This is the point of the lesson.
+TASK_B_WHY_AGENT_SURVIVED = """
+FILL ME IN
+"""
 
 # ── Task C ─────────────────────────────────────────────────────────────────
 
@@ -101,7 +122,7 @@ graph TD;
 	classDef last fill:#bfb6fc
 """
 
-# Compare the LangGraph graph to exercise3_rasa/data/rules.yml. Min 30 words.
+# Compare the LangGraph graph to exercise3_rasa/data/flows.yml. Min 30 words.
 TASK_D_COMPARISON = """
 The LangGraph graph is a tight loop: start → agent → (tools → agent)* → end.
 The agent decides at each step whether to call a tool or terminate — control flow
